@@ -18,7 +18,7 @@ class CreateMovieTable extends Migration
             $table->timestamps();
             $table->string('titolo');
             $table->text('trama')->nullable();
-            $table->string('anno')->nullable();
+            $table->string('anno',4)->nullable();
 
 
         });

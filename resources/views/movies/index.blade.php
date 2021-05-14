@@ -22,13 +22,12 @@
         }
 
         li{
-            margin-bottom: 50px; 
+            margin: 5px;
         }
 
-        span{
-            margin: 10px 0;
+        a{
+            text-decoration: none;
         }
-
     </style>
 </head>
 <body>
@@ -36,12 +35,10 @@
 
     <div class="container">
         <ul>
-            @foreach ($list as $movie)
-                <li>    <strong>Titolo: </strong> {{$movie->titolo}}<br/>
-                        <strong>Anno: </strong>{{$movie->anno}} <br/>
-                        <strong>Trama:</strong><br/> {{$movie->trama}} 
-                    </li>
-        
+            @foreach ($movies as $movie)
+                <li> 
+                    <a href="{{route('movies.show', ['movie' => $movie])}}">{{$movie->titolo}}</a> <br/>
+                </li>
             @endforeach
         </ul>
     </div>
