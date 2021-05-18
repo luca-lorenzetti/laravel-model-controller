@@ -1,18 +1,8 @@
-@extends('layouts.base');
+@extends('layouts/template_base');
 
 @section('content')
 <div class="container">
     <h1>Lista Films</h1>
-
-    @if ($errors->any())
-	<div class="alert alert-danger">
-		<ul>
-			@foreach ($errors->all() as $error)
-			<li>{{ $error }}</li>
-			@endforeach
-		</ul>
-	</div>
-	@endif
 
 
     <table class="table">
@@ -31,7 +21,8 @@
                     <td scope="col"><img src="{{$movie->cover_movie}}" alt="cover-movie"></td>
                     <td scope="col">{{$movie->titolo}}</td>
                     <td scope="col">{{$movie->anno}}</td>
-                    <td class="text-right"scope="col"><a href="{{route('movies.edit', [ 'movie' => $movie->id ])}}"><button type="button" class="btn btn-warning">Edit</button></a>
+                    <td class="text-right"scope="col">
+                        <a href="{{route('movies.edit', [ 'movie' => $movie->id ])}}"><button type="button" class="btn btn-warning">Edit</button></a>
                         {{-- <a href="{{route('movies.destroy', [ 'movie' => $movie->id ])}}"><button type="button" class="btn btn-danger">Elimina</button></a> --}}
                         <a href="{{route('movies.show', ['movie' => $movie->id])}}"><button type="button" class="btn btn-success">Visualizza</button></a>
                         <form action="{{route('movies.destroy', [ 'movie' => $movie->id ])}}" method="POST">
@@ -45,11 +36,11 @@
             @endforeach
         </tbody>
       </table>
-      @if (session('message'))
-    <div class="alert alert-success" >
-        {{ session('message') }}
-    </div>
-@endif
+      @if ( session('message') )
+        <div class="alert alert-success" >
+            {{ session('message') }}
+        </div>
+    @endif
 </div> 
 @endsection
 

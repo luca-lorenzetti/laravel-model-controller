@@ -7,13 +7,13 @@ use App\Movie;
 
 class MovieController extends Controller
 {
-    protected $requestValidation = [];
+    protected $validation = [];
 
     public function __construct()
     {
         $year = date("Y") + 1;
 
-        $this->requestValidation = [
+        $this->validation = [
             'titolo' => 'required|string|max:100',
             'trama' => 'required|string',
             'anno' => 'required|numeric|min:1900|max:'.$year,
@@ -30,7 +30,8 @@ class MovieController extends Controller
     public function index()
     {
         $movies = Movie::all();
-        return view('movies.index', compact('movies'));
+
+        return view('movies.index', compact('movies')); // ['movie' => $movie]
     }
 
     /**
@@ -51,16 +52,17 @@ class MovieController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        
-        $request->validate($this->requestValidation);
+        // $data = $request->all();
+        // $request->validate($this->validation);
+        // $movieNew = Movie::create($data);
+        // $movieNew->save();
 
-   
-        $movieNew = Movie::create($data);
+        $request->validate($this->validation);
 
-    
+        $movieNew = Movie::create( $request->all() );
+
         $movieNew->save();
-
+        
         return redirect()->route('movies.index')->with('message', 'Il film ' . $movieNew->titolo . ' è stato aggiunto');
     }
 
@@ -85,7 +87,6 @@ class MovieController extends Controller
      */
     public function edit(Movie $movie)
     {
-     
         return view('movies.edit', ['movie' => $movie]);
     }
 
@@ -98,14 +99,13 @@ class MovieController extends Controller
      */
     public function update(Request $request, Movie $movie)
     {
-        $data = $request->all();
+        $request->validate($this->validation);
 
+        $movie->update( $request->all() );
 
-        $request->validate($this->requestValidation);
+        // return redirect()->route('movies.index', $movie);
 
-        $movie->update( $data );
-
-        return redirect()->route('movies.index', $movie);
+        return redirect()->route('movies.index')->with('message', 'Il film ' .$movie->titolo. ' è stato modificato');
     }
 
     /**

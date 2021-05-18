@@ -1,9 +1,21 @@
-@extends('layouts.base');
+@extends('layouts/template_base');
 
 @section('content')
 
-
 <div class="container">
+    
+    {{-- Errors --}}
+    @if ($errors->any())
+	<div class="alert alert-danger">
+		<ul>
+			@foreach ($errors->all() as $error)
+			<li>{{ $error }}</li>
+			@endforeach
+		</ul>
+	</div>
+	@endif
+
+
     <form action="{{route('movies.store')}}" method="POST">
         @method('POST')
 		@csrf
@@ -18,14 +30,14 @@
           </div>
           <div class="form-group">
             <label for="trama">Trama</label>
-            <textarea class="form-control" name="trama" id="trama" placeholder="Inserisci la trama"></textarea>
+            <textarea class="form-control" name="trama" id="trama" rows="10" placeholder="Inserisci la trama"></textarea>
           </div>
           <div class="form-group">
             <label for="anno">Anno</label>
       
             <select id="anno" class="form-control" name="anno">
                 @for ($i = 1900; $i <= date("Y")+1; $i++)
-                <option value="{{$i}}" {{ $i == date('Y') ? 'selected' : ''}}>{{ $i }}</option>
+                    <option value="{{$i}}" {{ $i == date('Y') ? 'selected' : ''}}>{{ $i }}</option>
                 @endfor
             </select>
           </div>

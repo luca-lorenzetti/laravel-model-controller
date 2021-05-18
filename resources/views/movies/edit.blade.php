@@ -1,4 +1,4 @@
-@extends('layouts.base');
+@extends('layouts/template_base');
 
 @section('content')
 
@@ -18,7 +18,7 @@
           </div>
           <div class="form-group">
             <label for="trama">Trama</label>
-            <textarea  class="form-control" name="trama" id="trama" placeholder="Inserisci la trama"> {{$movie->trama}} </textarea>
+            <textarea  class="form-control" name="trama" rows="10" id="trama" placeholder="Inserisci la trama"> {{$movie->trama}} </textarea>
           </div>
           <div class="form-group">
             <label for="anno">Anno</label>
