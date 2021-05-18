@@ -7,6 +7,16 @@ use App\Movie;
 
 class MovieController extends Controller
 {
+    protected $validationRequest = [];
+
+    public function __construct()
+    {
+        $this->validationRequest = [
+
+        ];
+    }
+
+
     /**
      * Display a listing of the resource.
      *
