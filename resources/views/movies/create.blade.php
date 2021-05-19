@@ -18,7 +18,7 @@
 
     <form action="{{route('movies.store')}}" method="POST">
         @method('POST')
-		@csrf
+		    @csrf
 
         <div class="form-group">
             <label for="url">Url</label>
